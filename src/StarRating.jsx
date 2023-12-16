@@ -14,7 +14,8 @@ const starContainerStyle = {
 // size of starts in px which deafult is 40px
 // an optional className for more design
 // messages array to if length of it is equal to stars, so show the message instead of number
-// and default rating to when user see it first time
+// default rating to when user see it first time
+// *onSetRating allow you to pass rated number to parent by using a setter function of a state (mandatory)
 // examples of how to use it:
 {
   /* <StarRating maxStarts={10} />
@@ -23,11 +24,13 @@ const starContainerStyle = {
     <StarRating maxStarts={5} messages={["Terrrible", "Bad", "Okay", "Good", "Amazing"]} color="#14ea3a" size={50} defaultRating={3} />
 */
 }
-export default function StarRating({ maxStarts = 5, color = "#fcc419", size = 40, className = "", messages = [], defaultRating = 0 }) {
+export default function StarRating({ maxStarts = 5, color = "#fcc419", size = 40, className = "", messages = [], defaultRating = 0, onSetRating }) {
   const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
   function rateHandler(rate) {
     setRating(rate);
+    // here will pass the sat value to the function which from parent came
+    onSetRating(rate);
   }
 
   const textStyle = {
