@@ -1,10 +1,3 @@
-import ListBox from "./ListBox";
-import WatchedBox from "./WatchedList";
-export default function Main({ tempMovieData, tempWatchedData, average, movies }) {
-  return (
-    <main className="main">
-      <ListBox tempMovieData={tempMovieData} movies={movies} />
-      <WatchedBox tempWatchedData={tempWatchedData} average={average} />
-    </main>
-  );
+export default function Main({ children }) {
+  return <main className="main">{children}</main>;
 }
