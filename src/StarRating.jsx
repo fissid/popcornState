@@ -9,10 +9,23 @@ const starContainerStyle = {
   display: "flex",
 };
 
-export default function StarRating({ maxStarts = 5, color = "#fcc419", size = 40 }) {
-  const [rating, setRating] = useState(0);
+// for this component you can pass how many stars which deafult is 5
+// color of starts which deafult is yellow
+// size of starts in px which deafult is 40px
+// an optional className for more design
+// messages array to if length of it is equal to stars, so show the message instead of number
+// and default rating to when user see it first time
+// examples of how to use it:
+{
+  /* <StarRating maxStarts={10} />
+     <StarRating maxStarts={5} color="#44873a" size={24} />
+     <StarRating maxStarts={5} messages={["Terrrible", "Bad", "Okay", "Good", "Amazing"]} color="#b48a3a" size={50} />
+    <StarRating maxStarts={5} messages={["Terrrible", "Bad", "Okay", "Good", "Amazing"]} color="#14ea3a" size={50} defaultRating={3} />
+*/
+}
+export default function StarRating({ maxStarts = 5, color = "#fcc419", size = 40, className = "", messages = [], defaultRating = 0 }) {
+  const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
-
   function rateHandler(rate) {
     setRating(rate);
   }
@@ -25,13 +38,13 @@ export default function StarRating({ maxStarts = 5, color = "#fcc419", size = 40
   };
 
   return (
-    <div style={containerStyle}>
+    <div style={containerStyle} className={className}>
       <div style={starContainerStyle}>
         {Array.from({ length: maxStarts }, (_, i) => (
           <Star key={i} onRate={() => rateHandler(i + 1)} full={tempRating ? tempRating >= i + 1 : rating >= i + 1} onHoverIn={() => setTempRating(i + 1)} onHoverOut={() => setTempRating(0)} color={color} size={size} />
         ))}
       </div>
-      <p style={textStyle}>{tempRating || rating || ""}</p>
+      <p style={textStyle}>{messages.length === maxStarts ? messages[tempRating ? tempRating - 1 : rating - 1] : tempRating || rating || ""}</p>
     </div>
   );
 }
