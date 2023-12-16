@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ListBox({ children }) {
+export default function Box({ children }) {
   const [isOpen1, setIsOpen1] = useState(true);
   return (
     <div className="box">
