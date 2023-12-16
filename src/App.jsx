@@ -47,10 +47,9 @@ const tempWatchedData = [
   },
 ];
 
-const average = (arr) => arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
-
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
+  const [watched, setWatched] = useState(tempWatchedData);
   return (
     <>
       <Navbar>
@@ -59,8 +58,10 @@ export default function App() {
         <NumResults movies={movies} />
       </Navbar>
       <Main>
-        <ListBox tempMovieData={tempMovieData} movies={movies} />
-        <WatchedBox tempWatchedData={tempWatchedData} average={average} />
+        <ListBox>
+          <MovieList movies={movies} />
+        </ListBox>
+        <WatchedBox watched={watched} />
       </Main>
     </>
   );
@@ -80,5 +81,30 @@ function NumResults({ movies }) {
     <p className="num-results">
       Found <strong>{movies.length}</strong> results
     </p>
+  );
+}
+
+function MovieList({ movies }) {
+  return (
+    <ul className="list">
+      {movies?.map((movie) => (
+        <Movie movie={movie} key={movie.imdbID} />
+      ))}
+    </ul>
+  );
+}
+
+function Movie({ movie }) {
+  return (
+    <li key={movie.imdbID}>
+      <img src={movie.Poster} alt={`${movie.Title} poster`} />
+      <h3>{movie.Title}</h3>
+      <div>
+        <p>
+          <span>🗓</span>
+          <span>{movie.Year}</span>
+        </p>
+      </div>
+    </li>
   );
 }

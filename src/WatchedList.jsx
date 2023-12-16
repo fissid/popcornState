@@ -1,7 +1,6 @@
 import { useState } from "react";
-
-export default function WatchedBox({ tempWatchedData, average }) {
-  const [watched, setWatched] = useState(tempWatchedData);
+const average = (arr) => arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
+export default function WatchedBox({ watched }) {
   const [isOpen2, setIsOpen2] = useState(true);
 
   return (
