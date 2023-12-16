@@ -53,7 +53,7 @@ export default function App() {
     <>
       <Navbar>
         <Logo />
-        <Search />
+
         <NumResults movies={movies} />
       </Navbar>
       <Main tempWatchedData={tempWatchedData} tempMovieData={tempMovieData} average={average} movies={movies} />
