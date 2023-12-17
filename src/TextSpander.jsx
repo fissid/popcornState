@@ -7,7 +7,7 @@ const boxStyle = {
   backgroundColor: "#f7f7f7",
 };
 
-export default function TextExpander({ children, collapsedNumWords = 20, expandButtonText = "Show More", collapseButtonText = "Show Less", buttonColor = "1f09cd", expanded = false, className }) {
+export default function TextExpander({ children, collapsedNumWords = 20, expandButtonText = "Show More", collapseButtonText = "Show Less", buttonColor = "blue", expanded = false, className }) {
   const [isExpanded, setIsExpanded] = useState(expanded);
   const displayText = isExpanded ? children : `${children.split(" ").slice(0, collapsedNumWords).join(" ")}...`;
   const buttonStyle = {
