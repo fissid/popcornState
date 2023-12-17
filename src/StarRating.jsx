@@ -21,7 +21,9 @@ const starContainerStyle = {
   /* <StarRating maxStarts={10} />
      <StarRating maxStarts={5} color="#44873a" size={24} />
      <StarRating maxStarts={5} messages={["Terrrible", "Bad", "Okay", "Good", "Amazing"]} color="#b48a3a" size={50} />
-    <StarRating maxStarts={5} messages={["Terrrible", "Bad", "Okay", "Good", "Amazing"]} color="#14ea3a" size={50} defaultRating={3} />
+    <StarRating maxStarts={5} messages={["Terrrible", "Bad", "Okay", "Good", "Amazing"]} color="#14ea3a" size={50} defaultRating={3}
+    <StarRating maxStarts={5} messages={["Terrrible", "Bad", "Okay", "Good", "Amazing"]} color="#b48a3a" size={50} onSetRating={setRating}
+    />
 */
 }
 export default function StarRating({ maxStarts = 5, color = "#fcc419", size = 40, className = "", messages = [], defaultRating = 0, onSetRating }) {
