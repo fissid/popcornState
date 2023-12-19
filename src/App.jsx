@@ -5,6 +5,8 @@ import Search from "./Search";
 import Box from "./Box";
 import WatchedBox from "./WatchedList";
 
+const KEY = "15860c64e70938cbe4c4a1a564954e37b9a068c056438a41831a6f75a5c7edf5";
+const API_URL = "https://api.simkl.com/";
 const tempMovieData = [
   {
     imdbID: "tt1375666",
