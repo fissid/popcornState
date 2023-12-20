@@ -59,6 +59,7 @@ const average = (arr) => arr.reduce((acc, cur, i, arr) => acc + cur / arr.length
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState(tempWatchedData);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(function () {
     async function fetchMovies() {
       const res = await fetch(getQuery("s=super"));
