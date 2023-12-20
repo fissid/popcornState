@@ -4,13 +4,13 @@ import Main from "./Main";
 import Search from "./Search";
 import Box from "./Box";
 import WatchedBox from "./WatchedList";
-// API + query + KEY
+
 const API = "http://www.omdbapi.com/?";
 const KEY = "&apikey=360a9fb7";
-// let query = "i=tt3896198";
 
-function getQuery(q) {
-  return `${API}${q}${KEY}`;
+function getQuery(query) {
+  // API + query + KEY
+  return `${API}${query}${KEY}`;
 }
 
 const tempMovieData = [
@@ -60,9 +60,12 @@ export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState(tempWatchedData);
   useEffect(function () {
-    fetch(getQuery("s=persian"))
-      .then((res) => res.json())
-      .then((data) => setMovies(data.Search));
+    async function fetchMovies() {
+      const res = await fetch(getQuery("s=super"));
+      const data = await res.json();
+      setMovies(data.Search);
+    }
+    fetchMovies();
   }, []);
   return (
     <>
