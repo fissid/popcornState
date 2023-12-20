@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Main from "./Main";
 import Search from "./Search";
 import Box from "./Box";
 import WatchedBox from "./WatchedList";
+// API + query + KEY
+const API = "http://www.omdbapi.com/?";
+const KEY = "&apikey=360a9fb7";
+// let query = "i=tt3896198";
 
-const API = "http://www.omdbapi.com/?i=tt3896198&apikey=360a9fb7";
+function getQuery(q) {
+  return `${API}${q}${KEY}`;
+}
 
 const tempMovieData = [
   {
@@ -48,10 +54,16 @@ const tempWatchedData = [
     userRating: 9,
   },
 ];
+
 const average = (arr) => arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 export default function App() {
-  const [movies, setMovies] = useState(tempMovieData);
+  const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState(tempWatchedData);
+  useEffect(function () {
+    fetch(getQuery("s=persian"))
+      .then((res) => res.json())
+      .then((data) => setMovies(data.Search));
+  }, []);
   return (
     <>
       <Navbar>
