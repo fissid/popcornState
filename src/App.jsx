@@ -5,6 +5,8 @@ import Search from "./Search";
 import Box from "./Box";
 import WatchedBox from "./WatchedList";
 
+const API = "http://www.omdbapi.com/?i=tt3896198&apikey=360a9fb7";
+
 const tempMovieData = [
   {
     imdbID: "tt1375666",
