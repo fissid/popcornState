@@ -66,7 +66,7 @@ export default function App() {
     async function fetchMovies() {
       try {
         setIsLoading(true);
-        const res = await fetch(getQuery("s=sdvsdv"));
+        const res = await fetch(getQuery("s=per5151sian"));
 
         if (!res.ok) throw new Error("Something went wrong!");
 
@@ -75,16 +75,16 @@ export default function App() {
         if (data.Response === "False") throw new Error("Movie does not found!");
 
         setMovies(data.Search);
-        console.log(data.Search);
       } catch (err) {
-        setError(err);
-        console.log(err);
+        setError(err.message); // Set the error message
+        console.log(err.message); // Log only the error message
       } finally {
         setIsLoading(false);
       }
     }
     fetchMovies();
   }, []);
+
   return (
     <>
       <Navbar>
@@ -93,7 +93,10 @@ export default function App() {
         <NumResults movies={movies} />
       </Navbar>
       <Main>
-        <Box>{/* {isLoading ? <Loader /> : !Error ? <Error Message={error} /> : <MovieList movies={movies} />} */}</Box>
+        <Box>
+          {isLoading ? <Loader /> : error !== "" ? <Error message={error} /> : <MovieList movies={movies} />}
+          {/* {movieListTags} */}
+        </Box>
         <Box>
           <WatchedSummary watched={watched} />
           <WatchedMoviesList watched={watched} />
@@ -107,10 +110,10 @@ function Loader() {
   return <p className="loader">Loading...</p>;
 }
 
-function Error({ Message }) {
+function Error({ message }) {
   return (
     <p className="error">
-      <span>🛑</span> {Message}
+      <span>🛑</span> {message}
     </p>
   );
 }
