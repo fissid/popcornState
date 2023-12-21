@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import Main from "./Main";
 import Search from "./Search";
 import Box from "./Box";
-import WatchedBox from "./WatchedList";
+import StarRating from "./StarRating";
 
 const API = "http://www.omdbapi.com/?";
 const KEY = "&apikey=360a9fb7";
@@ -128,12 +128,49 @@ export default function App() {
 }
 
 function SelecetdMovie({ selectedId, onCloseMovie }) {
+  const [movie, setMovie] = useState({});
+  const { Title: title, Year: year, Poster: poster, Runtime: runtime, imdbRating, Plot: plot, Released: released, Actors: actors, Director: director, Genre: genre } = movie;
+  useEffect(
+    function () {
+      async function getMovieById() {
+        const res = await fetch(getQuery(`i=${selectedId}`));
+        const data = await res.json();
+        setMovie(data);
+      }
+      getMovieById();
+    },
+    [selectedId]
+  );
+
   return (
     <div className="details">
-      <button className="btn-back" onClick={onCloseMovie}>
-        &larr;
-      </button>
-      {selectedId}
+      <header>
+        <button className="btn-back" onClick={onCloseMovie}>
+          &larr;
+        </button>
+        <img src={poster} alt={title} />
+        <div className="details-overview">
+          <h2>{title}</h2>
+          <p>
+            {released} &bull; {runtime}
+          </p>
+          <p>{genre}</p>
+          <p>
+            <span>⭐</span>
+            {imdbRating} IMDB rating
+          </p>
+        </div>
+      </header>
+      <section>
+        <div className="rating">
+          <StarRating maxStarts={10} size={24} />
+        </div>
+        <p>
+          <em>{plot}</em>
+        </p>
+        <p>Starring {actors}</p>
+        <p>Directed By {director}</p>
+      </section>
     </div>
   );
 }
