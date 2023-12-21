@@ -67,14 +67,13 @@ export default function App() {
       try {
         setIsLoading(true);
         const res = await fetch(getQuery("s=persian"));
-
         if (!res.ok) throw new Error("Something went wrong!");
 
         const data = await res.json();
-
         if (data.Response === "False") throw new Error("Movie does not found!");
 
         setMovies(data.Search);
+        setError("");
       } catch (err) {
         setError(err.message);
       } finally {
