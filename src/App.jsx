@@ -76,6 +76,7 @@ export default function App() {
 
   function addWatchedHandler(movie) {
     setWatched((prev) => [...prev, movie]);
+    closeSelectedMovieHandler();
   }
   useEffect(
     function () {
@@ -120,7 +121,7 @@ export default function App() {
         <Box>{isLoading ? <Loader /> : error !== "" ? <Errorer message={error} /> : <MovieList movies={movies} onSelectMovie={selecetMovieHandler} />}</Box>
         <Box>
           {selectedId ? (
-            <SelecetdMovie getQuery={getQuery} selectedId={selectedId} onCloseMovie={closeSelectedMovieHandler} />
+            <SelecetdMovie getQuery={getQuery} selectedId={selectedId} onCloseMovie={closeSelectedMovieHandler} onAddWatched={addWatchedHandler} watched={watched} />
           ) : (
             <>
               <WatchedSummary watched={watched} />
