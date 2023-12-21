@@ -9,7 +9,7 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
   const isWatched = watched.map((each) => each.imdbID).includes(selectedId);
   const watchedUserRating = watched.find((each) => each.imdbID === selectedId)?.userRating;
 
-  const { Title: title, Poster: poster, Runtime: runtime, imdbRating, Plot: plot, Released: released, Actors: actors, Director: director, Genre: genre } = movie;
+  const { Title: title, Year: year, Poster: poster, Runtime: runtime, imdbRating, Plot: plot, Released: released, Actors: actors, Director: director, Genre: genre } = movie;
   function addBtnHandler() {
     const newWatchedMovie = {
       imdbID: selectedId,
@@ -34,6 +34,19 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
       getMovieById();
     },
     [selectedId]
+  );
+
+  useEffect(
+    function () {
+      if (!title) return;
+      document.title = `Movie | ${title} | ${year}`;
+
+      return function () {
+        document.title = "popcornState";
+        console.log(`before re-render ${title} movie`);
+      };
+    },
+    [title]
   );
 
   return (
