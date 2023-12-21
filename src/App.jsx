@@ -129,13 +129,16 @@ export default function App() {
 
 function SelecetdMovie({ selectedId, onCloseMovie }) {
   const [movie, setMovie] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const { Title: title, Year: year, Poster: poster, Runtime: runtime, imdbRating, Plot: plot, Released: released, Actors: actors, Director: director, Genre: genre } = movie;
   useEffect(
     function () {
       async function getMovieById() {
+        setIsLoading(true);
         const res = await fetch(getQuery(`i=${selectedId}`));
         const data = await res.json();
         setMovie(data);
+        setIsLoading(false);
       }
       getMovieById();
     },
