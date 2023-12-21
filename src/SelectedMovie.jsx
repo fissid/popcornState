@@ -6,6 +6,8 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
+  const isWatched = watched.map((each) => each.imdbID).includes(selectedId);
+  const watchedUserRating = watched.find((each) => each.imdbID === selectedId)?.userRating;
 
   const { Title: title, Poster: poster, Runtime: runtime, imdbRating, Plot: plot, Released: released, Actors: actors, Director: director, Genre: genre } = movie;
   function addBtnHandler() {
@@ -59,12 +61,21 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
           </header>
           <section>
             <div className="rating">
-              <StarRating maxStarts={10} size={24} onSetRating={setUserRating} />
-              {userRating > 0 ? (
-                <button className="btn-add" onClick={addBtnHandler}>
-                  + Add To List
-                </button>
-              ) : null}
+              {!isWatched ? (
+                <>
+                  <StarRating maxStarts={10} size={24} onSetRating={setUserRating} />
+                  {userRating > 0 ? (
+                    <button className="btn-add" onClick={addBtnHandler}>
+                      + Add To List
+                    </button>
+                  ) : null}
+                </>
+              ) : (
+                <p>
+                  This movie has been added with {watchedUserRating}
+                  <span>⭐</span>
+                </p>
+              )}
             </div>
             <p>
               <em>{plot}</em>

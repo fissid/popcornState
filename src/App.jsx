@@ -78,6 +78,11 @@ export default function App() {
     setWatched((prev) => [...prev, movie]);
     closeSelectedMovieHandler();
   }
+
+  function deleteWatchedHandler(id) {
+    setWatched((prev) => prev.filter((each) => each.imdbID !== id));
+  }
+
   useEffect(
     function () {
       setIsLoading(true);
@@ -125,7 +130,7 @@ export default function App() {
           ) : (
             <>
               <WatchedSummary watched={watched} />
-              <WatchedMoviesList watched={watched} />
+              <WatchedMoviesList watched={watched} onDeleteWatched={deleteWatchedHandler} />
             </>
           )}
         </Box>
@@ -184,11 +189,11 @@ function Movie({ movie, onSelectMovie }) {
   );
 }
 
-function WatchedMoviesList({ watched }) {
+function WatchedMoviesList({ watched, onDeleteWatched }) {
   return (
     <ul className="list">
       {watched.map((movie) => (
-        <WatchedMovie movie={movie} key={movie.imdbID} />
+        <WatchedMovie movie={movie} key={movie.imdbID} onDeleteWatched={onDeleteWatched} />
       ))}
     </ul>
   );
