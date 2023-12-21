@@ -57,37 +57,48 @@ const tempWatchedData = [
 
 const average = (arr) => arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 export default function App() {
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  useEffect(function () {
-    setIsLoading(true);
-    async function fetchMovies() {
-      try {
-        setIsLoading(true);
-        const res = await fetch(getQuery("s=persian"));
-        if (!res.ok) throw new Error("Something went wrong!");
+  useEffect(
+    function () {
+      setIsLoading(true);
+      async function fetchMovies() {
+        try {
+          setIsLoading(true);
+          setError("");
 
-        const data = await res.json();
-        if (data.Response === "False") throw new Error("Movie does not found!");
+          const res = await fetch(getQuery(`s=${query}`));
+          if (!res.ok) throw new Error("Something went wrong!");
 
-        setMovies(data.Search);
-        setError("");
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
+          const data = await res.json();
+          if (data.Response === "False") throw new Error("Movie does not found!");
+
+          setMovies(data.Search);
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setIsLoading(false);
+        }
       }
-    }
-    fetchMovies();
-  }, []);
+      if (query.length < 2) {
+        setMovies([]);
+        setError("");
+        setIsLoading(false);
+        return;
+      }
+      fetchMovies();
+    },
+    [query]
+  );
 
   return (
     <>
       <Navbar>
         <Logo />
-        <Search />
+        <Search query={query} setQuery={setQuery} />
         <NumResults movies={movies} />
       </Navbar>
       <Main>
