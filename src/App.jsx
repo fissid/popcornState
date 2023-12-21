@@ -76,7 +76,7 @@ export default function App() {
 
   function addWatchedHandler(movie) {
     setWatched((prev) => [...prev, movie]);
-    // closeSelectedMovieHandler();
+    closeSelectedMovieHandler();
   }
 
   function deleteWatchedHandler(id) {
