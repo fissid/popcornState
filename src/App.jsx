@@ -59,7 +59,7 @@ const tempWatchedData = [
 ];
 
 export default function App() {
-  const [query, setQuery] = useState("test");
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -101,6 +101,7 @@ export default function App() {
           setMovies(data.Search);
         } catch (err) {
           if (err.name !== "AbortError") {
+            console.log(err.message);
             setError(err.message);
           }
         } finally {
@@ -113,7 +114,10 @@ export default function App() {
         setIsLoading(false);
         return;
       }
+
+      closeSelectedMovieHandler();
       fetchMovies();
+
       return function () {
         controller.abort();
       };

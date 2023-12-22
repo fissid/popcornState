@@ -10,6 +10,7 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
   const watchedUserRating = watched.find((each) => each.imdbID === selectedId)?.userRating;
 
   const { Title: title, Year: year, Poster: poster, Runtime: runtime, imdbRating, Plot: plot, Released: released, Actors: actors, Director: director, Genre: genre } = movie;
+
   function addBtnHandler() {
     const newWatchedMovie = {
       imdbID: selectedId,
