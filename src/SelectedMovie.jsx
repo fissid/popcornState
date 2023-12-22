@@ -33,7 +33,7 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
       }
       getMovieById();
     },
-    [selectedId]
+    [selectedId, getQuery]
   );
 
   useEffect(
@@ -46,7 +46,22 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
         console.log(`before re-render ${title} movie`);
       };
     },
-    [title]
+    [title, year]
+  );
+
+  useEffect(
+    function () {
+      function callBack(e) {
+        if (e.code === "Escape") {
+          onCloseMovie();
+        }
+      }
+      document.addEventListener("keydown", callBack);
+      return function () {
+        document.removeEventListener("keydown", callBack);
+      };
+    },
+    [onCloseMovie]
   );
 
   return (
