@@ -43,7 +43,7 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
 
       return function () {
         document.title = "popcornState";
-        console.log(`before re-render ${title} movie`);
+        // console.log(`before re-render ${title} movie`);
       };
     },
     [title, year]
