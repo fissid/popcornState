@@ -36,66 +36,36 @@ export default function App() {
     <div style={{ fontSize: "50px" }}>
       <input type="text" value={inputValue} onChange={(e) => setInputValue(Number(e.target.value))} />
       <select value={from} onChange={(e) => setFrom(e.target.value)}>
-        {to === "USD" ? (
-          <option value="USD" disabled>
-            USD
-          </option>
-        ) : (
-          <option value="USD">USD</option>
-        )}
-        {to === "EUR" ? (
-          <option value="EUR" disabled>
-            EUR
-          </option>
-        ) : (
-          <option value="EUR">EUR</option>
-        )}
-        {to === "CAD" ? (
-          <option value="CAD" disabled>
-            CAD
-          </option>
-        ) : (
-          <option value="CAD">CAD</option>
-        )}
-        {to === "INR" ? (
-          <option value="INR" disabled>
-            INR
-          </option>
-        ) : (
-          <option value="INR">INR</option>
-        )}
+        <option value="USD" disabled={to === "USD" && true}>
+          USD
+        </option>
+        <option value="EUR" disabled={to === "EUR" && true}>
+          EUR
+        </option>
+        <option value="CAD" disabled={to === "CAD" && true}>
+          CAD
+        </option>
+        <option value="INR" disabled={to === "INR" && true}>
+          INR
+        </option>
       </select>
       <select value={to} onChange={(e) => setTo(e.target.value)}>
-        {from === "USD" ? (
-          <option value="USD" disabled>
-            USD
-          </option>
-        ) : (
-          <option value="USD">USD</option>
-        )}
-        {from === "EUR" ? (
-          <option value="EUR" disabled>
-            EUR
-          </option>
-        ) : (
-          <option value="EUR">EUR</option>
-        )}
-        {from === "CAD" ? (
-          <option value="CAD" disabled>
-            CAD
-          </option>
-        ) : (
-          <option value="CAD">CAD</option>
-        )}
-        {from === "INR" ? (
-          <option value="INR" disabled>
-            INR
-          </option>
-        ) : (
-          <option value="INR">INR</option>
-        )}
+        <option value="USD" disabled={from === "USD" && true}>
+          USD
+        </option>
+        <option value="EUR" disabled={from === "ERU" && true}>
+          EUR
+        </option>
+        <option value="CAD" disabled={from === "CAD" && true}>
+          CAD
+        </option>
+        <option value="INR" disabled={from === "INR" && true}>
+          INR
+        </option>
       </select>
-      <p>{out}</p>
+      <p>
+        {out} {to}
+      </p>
     </div>
   );
 }
