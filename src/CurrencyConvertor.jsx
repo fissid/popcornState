@@ -22,6 +22,8 @@ export default function App() {
           }
         }
       }
+
+      if (from === to) return setOut(inputValue);
       callConvertor();
 
       return function () {
