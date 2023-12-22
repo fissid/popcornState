@@ -6,7 +6,7 @@ export default function App() {
   const [inputValue, setInputValue] = useState(1);
   const [from, setFrom] = useState("USD");
   const [to, setTo] = useState("EUR");
-  const [out, setOut] = useState(0);
+  const [out, setOut] = useState("");
   useEffect(
     function () {
       const controller = new AbortController();
@@ -34,7 +34,7 @@ export default function App() {
 
   return (
     <div style={{ fontSize: "50px" }}>
-      <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+      <input type="text" value={inputValue} onChange={(e) => setInputValue(Number(e.target.value))} />
       <select value={from} onChange={(e) => setFrom(e.target.value)}>
         {to === "USD" ? (
           <option value="USD" disabled>
