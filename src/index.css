@@ -56,6 +56,22 @@ body {
   overflow: auto;
   position: relative;
 }
+.mobile {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .main {
+    display: none;
+  }
+  .nav-bar {
+    display: none;
+  }
+  .mobile {
+    display: block;
+    font-size: 2rem;
+    text-align: center;
+  }
+}
 
 .loader {
   text-align: center;
