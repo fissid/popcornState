@@ -11,11 +11,6 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
 
   const { Title: title, Year: year, Poster: poster, Runtime: runtime, imdbRating, Plot: plot, Released: released, Actors: actors, Director: director, Genre: genre } = movie;
 
-  const isTop = imdbRating > 8;
-  console.log(isTop);
-
-  const [avgRat, setAvgRat] = useState(0);
-
   function addBtnHandler() {
     const newWatchedMovie = {
       imdbID: selectedId,
