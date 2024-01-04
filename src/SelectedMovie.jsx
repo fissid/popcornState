@@ -10,7 +10,7 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
 
   useEffect(
     function () {
-      if () countRef.current++;
+      if (userRating) countRef.current++;
     },
     [userRating]
   );
