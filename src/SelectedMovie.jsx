@@ -8,12 +8,9 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
   const [userRating, setUserRating] = useState("");
   const countRef = useRef(0);
 
-  useEffect(
-    function () {
-      if (userRating) countRef.current++;
-    },
-    [userRating]
-  );
+  useEffect(function () {
+    if (userRating) countRef.current++;
+  }, []);
 
   const isWatched = watched.map((each) => each.imdbID).includes(selectedId);
   const watchedUserRating = watched.find((each) => each.imdbID === selectedId)?.userRating;
