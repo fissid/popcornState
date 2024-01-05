@@ -48,7 +48,7 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
     [title, year]
   );
 
-  useKey("escape", onCloseMovie);
+  useKey("Escape", onCloseMovie);
 
   return (
     <div className="details">
