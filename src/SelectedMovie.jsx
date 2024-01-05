@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import StarRating from "./StarRating";
 import Loader from "./Loader";
+import { useMovie } from "./useMovie";
 
 export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAddWatched, watched }) {
-  const [movie, setMovie] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
   const countRef = useRef(0);
 
@@ -14,6 +13,8 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
     },
     [userRating]
   );
+
+  const { isLoading, movie } = useMovie(getQuery, selectedId);
 
   const isWatched = watched.map((each) => each.imdbID).includes(selectedId);
   const watchedUserRating = watched.find((each) => each.imdbID === selectedId)?.userRating;
@@ -33,20 +34,6 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
     onAddWatched(newWatchedMovie);
     console.log(newWatchedMovie.userDecisionCount);
   }
-
-  useEffect(
-    function () {
-      async function getMovieById() {
-        setIsLoading(true);
-        const res = await fetch(getQuery(`i=${selectedId}`));
-        const data = await res.json();
-        setMovie(data);
-        setIsLoading(false);
-      }
-      getMovieById();
-    },
-    [selectedId, getQuery]
-  );
 
   useEffect(
     function () {
