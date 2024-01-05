@@ -7,6 +7,7 @@ import Loader from "./Loader";
 import SelecetdMovie from "./SelectedMovie";
 import WatchedSummary from "./WatchedSummary";
 import WatchedMovie from "./WatchedMovie";
+import { useLocalStorageState } from "./useLocalStorageState";
 
 const API = "http://www.omdbapi.com/?";
 const KEY = "&apikey=360a9fb7";
@@ -65,10 +66,8 @@ export default function App() {
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
   // const [watched, setWatched] = useState([]);
-  const [watched, setWatched] = useState(function () {
-    const storedData = localStorage.getItem("watched");
-    return JSON.parse(storedData);
-  });
+
+  const [watched, setWatched] = useLocalStorageState([], "watched");
 
   function selecetMovieHandler(id) {
     setSelectedId((prev) => (prev === id ? null : id));
@@ -89,13 +88,6 @@ export default function App() {
 
   useEffect(
     function () {
-      localStorage.setItem("watched", JSON.stringify(watched));
-    },
-    [watched]
-  );
-
-  useEffect(
-    function () {
       setIsLoading(true);
       const controller = new AbortController();
       async function fetchMovies() {
@@ -112,7 +104,6 @@ export default function App() {
           setMovies(data.Search);
         } catch (err) {
           if (err.name !== "AbortError") {
-            console.log(err.message);
             setError(err.message);
           }
         } finally {

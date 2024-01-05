@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import StarRating from "./StarRating";
 import Loader from "./Loader";
 import { useMovie } from "./useMovie";
+import { useKey } from "./useKey";
 
 export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAddWatched, watched }) {
   const [userRating, setUserRating] = useState("");
@@ -32,7 +33,6 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
       userDecisionCount: countRef.current,
     };
     onAddWatched(newWatchedMovie);
-    console.log(newWatchedMovie.userDecisionCount);
   }
 
   useEffect(
@@ -48,20 +48,7 @@ export default function SelecetdMovie({ selectedId, onCloseMovie, getQuery, onAd
     [title, year]
   );
 
-  useEffect(
-    function () {
-      function callBack(e) {
-        if (e.code === "Escape") {
-          onCloseMovie();
-        }
-      }
-      document.addEventListener("keydown", callBack);
-      return function () {
-        document.removeEventListener("keydown", callBack);
-      };
-    },
-    [onCloseMovie]
-  );
+  useKey("Escape", onCloseMovie);
 
   return (
     <div className="details">
