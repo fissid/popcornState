@@ -16,6 +16,7 @@ export default function App() {
     setCountClicks((count) => count + 1);
     getPosition();
   }
+
   return (
     <div>
       <button onClick={clickHandler} disabled={isLoading}>
